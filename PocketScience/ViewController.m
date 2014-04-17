@@ -9,6 +9,12 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+{
+    NSString *jsonUrl;
+    NSMutableDictionary *dict;
+    NSDictionary *trackInfo;
+    NSMutableArray *name;
+}
 
 @end
 
