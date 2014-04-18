@@ -13,6 +13,7 @@
     NSMutableArray *casts;
     NSArray *searchResults;
     NSString *mailMessage;
+    NSDictionary *myDict;
 }
 @end
 
@@ -50,24 +51,7 @@
 }
 
 - (IBAction)sendEmail:(id)sender{
-    // Email Title
-    NSString *emailTitle = @"Test Email";
-    
-    // Email Body
-    NSString *messageBody = @"i love ios";
-    
-    // Email Subject
-    NSArray *toRecepients = [NSArray arrayWithObject:@"taomalla@gmail.com"];
-    
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc]init];
-    mc.mailComposeDelegate = self;
-    [mc setSubject:emailTitle];
-    [mc setMessageBody:messageBody isHTML:NO];
-    [mc setToRecipients:toRecepients];
-    
-    // Present mail view controller on screen
-    [self presentViewController:mc animated:YES completion:NULL];
-}
+   }
 
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
     switch (result)
@@ -112,7 +96,7 @@
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *myDict = [casts objectAtIndex:indexPath.row];
+    myDict = [casts objectAtIndex:indexPath.row];
     
     if (tableView == self.searchDisplayController.searchResultsTableView)
     {
@@ -144,12 +128,30 @@
     return cell;
 }
 
-// Set the cell click
+// UITableView Cell Click
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //NSInteger *selected = indexPath.row;
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     mailMessage = cell.textLabel.text;
+    NSArray *splitArray = [mailMessage componentsSeparatedByString:@","];
+    
+    // Email Title
+    NSString *emailTitle = [splitArray objectAtIndex:0];
+    
+    // Email Body
+    NSString *messageBody = [splitArray objectAtIndex:1];
+    
+    // Email Subject
+    NSArray *toRecepients = [NSArray arrayWithObject:@"taomalla@gmail.com"];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc]init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setToRecipients:toRecepients];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
