@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E87AAC51901AEAA004AF069 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E87AAC41901AEAA004AF069 /* MessageUI.framework */; };
 		8E928BD319007B33006B3C68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E928BD219007B33006B3C68 /* Foundation.framework */; };
 		8E928BD519007B33006B3C68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E928BD419007B33006B3C68 /* CoreGraphics.framework */; };
 		8E928BD719007B33006B3C68 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E928BD619007B33006B3C68 /* UIKit.framework */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E87AAC41901AEAA004AF069 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8E928BCF19007B33006B3C68 /* PocketScience.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketScience.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E928BD219007B33006B3C68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E928BD419007B33006B3C68 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E87AAC51901AEAA004AF069 /* MessageUI.framework in Frameworks */,
 				8E928BD519007B33006B3C68 /* CoreGraphics.framework in Frameworks */,
 				8E928BD719007B33006B3C68 /* UIKit.framework in Frameworks */,
 				8E928BD319007B33006B3C68 /* Foundation.framework in Frameworks */,
@@ -101,6 +104,7 @@
 		8E928BD119007B33006B3C68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E87AAC41901AEAA004AF069 /* MessageUI.framework */,
 				8E928BD219007B33006B3C68 /* Foundation.framework */,
 				8E928BD419007B33006B3C68 /* CoreGraphics.framework */,
 				8E928BD619007B33006B3C68 /* UIKit.framework */,
@@ -460,6 +464,7 @@
 				8E928C0319007B33006B3C68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E928C0419007B33006B3C68 /* Build configuration list for PBXNativeTarget "PocketScienceTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +473,7 @@
 				8E928C0619007B33006B3C68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

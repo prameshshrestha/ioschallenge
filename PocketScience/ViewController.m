@@ -12,6 +12,7 @@
 {
     NSMutableArray *casts;
     NSArray *searchResults;
+    NSString *mailMessage;
 }
 @end
 
@@ -46,6 +47,48 @@
 {
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles]objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     return YES;
+}
+
+- (IBAction)sendEmail:(id)sender{
+    // Email Title
+    NSString *emailTitle = @"Test Email";
+    
+    // Email Body
+    NSString *messageBody = @"i love ios";
+    
+    // Email Subject
+    NSArray *toRecepients = [NSArray arrayWithObject:@"taomalla@gmail.com"];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc]init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setToRecipients:toRecepients];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail Saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail Sent");
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 // UITableViewDelegate Methods
@@ -99,6 +142,14 @@
     [cell.textLabel setText:cellValue];
     [cell setBackgroundColor:[UIColor clearColor]];
     return cell;
+}
+
+// Set the cell click
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //NSInteger *selected = indexPath.row;
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    mailMessage = cell.textLabel.text;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
