@@ -47,10 +47,15 @@
     static NSString *CellIdentifier = @"Cell Identifier";
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    //[[cell textLabel] setText:[casts objectAtIndex:[indexPath row]]];
-    //NSString *barcode = [casts objectAtIndex:[indexPath row]];
     NSDictionary *myDict = [casts objectAtIndex:indexPath.row];
-    NSString *cellValue = [NSString stringWithFormat:@"%@, %@", [myDict objectForKey:@"titleText"], [myDict objectForKey:@"detailText"]];
+    
+    NSString *imageUrl = [myDict objectForKey:@"imageURL"];
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [UIImage imageWithData:imageData];
+    cell.imageView.image = image;
+    
+    NSString *cellValue = [NSString stringWithFormat:@"%@, %@",[myDict objectForKey:@"titleText"], [myDict objectForKey:@"detailText"]];
     cell.textLabel.text = cellValue;
     
     
