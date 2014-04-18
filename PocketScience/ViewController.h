@@ -13,5 +13,4 @@
 
 @property (weak, nonatomic) IBOutlet UISearchBar *jsonSearchBar;
 
-- (IBAction)sendEmail:(id)sender;
 @end

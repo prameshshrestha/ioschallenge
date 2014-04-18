@@ -50,9 +50,6 @@
     return YES;
 }
 
-- (IBAction)sendEmail:(id)sender{
-   }
-
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
     switch (result)
     {
@@ -147,7 +144,7 @@
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc]init];
     mc.mailComposeDelegate = self;
     [mc setSubject:emailTitle];
-    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setMessageBody:messageBody isHTML:YES];
     [mc setToRecipients:toRecepients];
     
     // Present mail view controller on screen
