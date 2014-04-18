@@ -103,24 +103,24 @@
     else
     {
         
+        NSString *imageUrl = [myDict objectForKey:@"imageURL"];
+        NSURL *url = [NSURL URLWithString:imageUrl];
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        UIImage *image = [UIImage imageWithData:imageData];
+        cell.imageView.image = image;
+        
+        NSString *cellValue = [NSString stringWithFormat:@"%@, %@",[myDict objectForKey:@"titleText"], [myDict objectForKey:@"detailText"]];
+        cell.textLabel.text = cellValue;
+
     }
     
-    
-    NSString *imageUrl = [myDict objectForKey:@"imageURL"];
-    NSURL *url = [NSURL URLWithString:imageUrl];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [UIImage imageWithData:imageData];
-    cell.imageView.image = image;
-    
-    NSString *cellValue = [NSString stringWithFormat:@"%@, %@",[myDict objectForKey:@"titleText"], [myDict objectForKey:@"detailText"]];
-    cell.textLabel.text = cellValue;
     
     
     // Create custom color
     UIColor *color = [UIColor colorWithRed:0/255.0f green:150/255.0f blue:225/255.0f alpha:1.0f];
     cell.textLabel.textColor = color;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0];
-    [cell.textLabel setText:cellValue];
+    //[cell.textLabel setText:cellValue];
     [cell setBackgroundColor:[UIColor clearColor]];
     return cell;
 }
@@ -153,7 +153,12 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 60;
+}
+
+-(BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning
