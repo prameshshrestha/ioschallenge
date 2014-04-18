@@ -11,11 +11,13 @@
 @interface ViewController ()
 {
     NSMutableArray *casts;
+    NSArray *searchResults;
 }
-
 @end
 
 @implementation ViewController
+
+@synthesize jsonSearchBar;
 
 - (void)viewDidLoad
 {
@@ -34,20 +36,51 @@
     }
 }
 
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    searchResults = [casts filteredArrayUsingPredicate:resultPredicate];
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles]objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    return YES;
+}
+
 // UITableViewDelegate Methods
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [casts count];
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [searchResults count];
+    }
+    else
+    {
+        return [casts count];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell Identifier";
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
     NSDictionary *myDict = [casts objectAtIndex:indexPath.row];
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        NSString *cellValue = [NSString stringWithFormat:@"%@, %@",[myDict objectForKey:@"titleText"], [myDict objectForKey:@"detailText"]];
+        cell.textLabel.text = cellValue;
+    }
+    else
+    {
+        
+    }
+    
     
     NSString *imageUrl = [myDict objectForKey:@"imageURL"];
     NSURL *url = [NSURL URLWithString:imageUrl];
@@ -68,6 +101,10 @@
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40;
+}
 
 - (void)didReceiveMemoryWarning
 {
