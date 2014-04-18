@@ -10,10 +10,8 @@
 
 @interface ViewController ()
 {
-    NSString *jsonUrl;
-    NSMutableDictionary *dict;
-    NSDictionary *trackInfo;
-    NSMutableArray *name;
+    NSMutableArray *casts;
+    
 }
 
 @end
@@ -31,28 +29,19 @@
     NSData *data = [NSData dataWithContentsOfURL:restUrl options:NSDataReadingUncached error:&error];
     if(!error)
     {
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        NSMutableArray *array = [json objectForKey:@"GetAllTrackingPointsResult"];
+        // create NSDictionary from the JSON data
+        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         
-        dict = [[NSMutableDictionary alloc]init];
-        for (int i = 0; i < array.count; i++)
+        // Create a new array to hold Cast
+        casts = [jsonDictionary objectForKey:@"cast"];
+        
+        for (int i = 0; i < casts.count; i++)
         {
-            trackInfo = [array objectAtIndex:i];
-            NSString *ttype = [trackInfo objectForKey:@"TType"];
-            NSString *tname = [trackInfo objectForKey:@"TName"];
-            [dict setValue:tname forKey:ttype];
+            NSDictionary *cast = [casts objectAtIndex:i];
+            NSString *first = [cast objectForKey:@"titleText"];
+            NSString *last = [cast objectForKey:@"detailText"];
         }
-        name = [[NSMutableArray alloc]init];
-        for (id key in dict)
-        {
-            id value = [dict objectForKey:key];
-            [name addObject:value];
-        }
-    }
-    else
-    {
-        UIAlertView *err = [[UIAlertView alloc]initWithTitle:@"Server Error" message:@"Cannot connect to the server" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [err show];
+        
     }
 }
 
@@ -62,18 +51,27 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [name count];
+    return [casts count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell Identifier";
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSString *barcode = [name objectAtIndex:[indexPath row]];
+    //[[cell textLabel] setText:[casts objectAtIndex:[indexPath row]]];
+    //NSString *barcode = [casts objectAtIndex:[indexPath row]];
+    NSDictionary *myDict = [casts objectAtIndex:indexPath.row];
+    cell.textLabel.text = [myDict objectForKey:@"titleText"];
+    
+    
+    
+    
+    
+    
     // Create custom color
     UIColor *color = [UIColor colorWithRed:0/255.0f green:150/255.0f blue:225/255.0f alpha:1.0f];
     cell.textLabel.textColor = color;
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0];    [cell.textLabel setText:barcode];
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0];    //[cell.textLabel setText:barcode];
     [cell setBackgroundColor:[UIColor clearColor]];
     return cell;
 }
