@@ -99,7 +99,6 @@
     Data *data  = [[Data alloc]init];
     data.title = [myDict objectForKey:@"titleText"];
     data.detail = [myDict objectForKey:@"detailText"];
-    NSLog(@"%@", data.title);
     
     if (tableView == self.searchDisplayController.searchResultsTableView)
     {
