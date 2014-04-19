@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D9AD13C19030A1000A0019F /* Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9AD13B19030A1000A0019F /* Data.m */; };
 		8E87AAC51901AEAA004AF069 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E87AAC41901AEAA004AF069 /* MessageUI.framework */; };
 		8E928BD319007B33006B3C68 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E928BD219007B33006B3C68 /* Foundation.framework */; };
 		8E928BD519007B33006B3C68 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E928BD419007B33006B3C68 /* CoreGraphics.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D9AD13A19030A1000A0019F /* Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Data.h; sourceTree = "<group>"; };
+		1D9AD13B19030A1000A0019F /* Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Data.m; sourceTree = "<group>"; };
 		8E87AAC41901AEAA004AF069 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8E928BCF19007B33006B3C68 /* PocketScience.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketScience.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E928BD219007B33006B3C68 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -116,6 +119,8 @@
 		8E928BD819007B33006B3C68 /* PocketScience */ = {
 			isa = PBXGroup;
 			children = (
+				1D9AD13A19030A1000A0019F /* Data.h */,
+				1D9AD13B19030A1000A0019F /* Data.m */,
 				8E928BE119007B33006B3C68 /* AppDelegate.h */,
 				8E928BE219007B33006B3C68 /* AppDelegate.m */,
 				8E928BE419007B33006B3C68 /* Main.storyboard */,
@@ -256,6 +261,7 @@
 				8E928BE919007B33006B3C68 /* ViewController.m in Sources */,
 				8E928BE319007B33006B3C68 /* AppDelegate.m in Sources */,
 				8E928BDF19007B33006B3C68 /* main.m in Sources */,
+				1D9AD13C19030A1000A0019F /* Data.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

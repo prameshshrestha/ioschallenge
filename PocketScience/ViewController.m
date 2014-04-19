@@ -7,13 +7,15 @@
 //
 
 #import "ViewController.h"
+#import "Data.h"
 
 @interface ViewController ()
 {
-    NSMutableArray *casts;
+    NSArray *casts;
     NSArray *searchResults;
     NSString *mailMessage;
     NSDictionary *myDict;
+    NSString *cellValue;
 }
 @end
 
@@ -40,7 +42,7 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF.title contains[cd] %@", searchText];
     searchResults = [casts filteredArrayUsingPredicate:resultPredicate];
 }
 
@@ -94,10 +96,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     myDict = [casts objectAtIndex:indexPath.row];
+    Data *data  = [[Data alloc]init];
+    data.title = [myDict objectForKey:@"titleText"];
+    data.detail = [myDict objectForKey:@"detailText"];
+    NSLog(@"%@", data.title);
     
     if (tableView == self.searchDisplayController.searchResultsTableView)
     {
-        NSString *cellValue = [NSString stringWithFormat:@"%@, %@",[myDict objectForKey:@"titleText"], [myDict objectForKey:@"detailText"]];
+        cellValue = [NSString stringWithFormat:@"%@, %@", data.title, data.detail];
         cell.textLabel.text = cellValue;
     }
     else
@@ -109,18 +115,15 @@
         UIImage *image = [UIImage imageWithData:imageData];
         cell.imageView.image = image;
         
-        NSString *cellValue = [NSString stringWithFormat:@"%@, %@",[myDict objectForKey:@"titleText"], [myDict objectForKey:@"detailText"]];
+        cellValue = [NSString stringWithFormat:@"%@, %@", data.title, data.detail];
         cell.textLabel.text = cellValue;
-
     }
-    
-    
     
     // Create custom color
     UIColor *color = [UIColor colorWithRed:0/255.0f green:150/255.0f blue:225/255.0f alpha:1.0f];
     cell.textLabel.textColor = color;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0];
-    //[cell.textLabel setText:cellValue];
+    [cell.textLabel setText:cellValue];
     [cell setBackgroundColor:[UIColor clearColor]];
     return cell;
 }
