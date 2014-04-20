@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "Data.h"
+#import "AsyncImageView.h"
 
 @interface ViewController ()
 {
@@ -107,6 +108,20 @@
     }
     else
     {
+        //Load image asynchronously
+        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+          //  NSString *imageUrl = [myDict objectForKey:@"imageURL"];
+            //NSURL *url = [NSURL URLWithString:imageUrl];
+            //NSData *imageData = [NSData dataWithContentsOfURL:url];
+            //dispatch_sync(dispatch_get_main_queue(), ^{
+            //UIImage *image = [UIImage imageWithData:imageData];
+            //cell.imageView.image = image;
+                
+                //[tableView beginUpdates];
+                //[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+                //[tableView endUpdates];
+            //});
+        //});
         
         NSString *imageUrl = [myDict objectForKey:@"imageURL"];
         NSURL *url = [NSURL URLWithString:imageUrl];
@@ -116,6 +131,7 @@
         
         cellValue = [NSString stringWithFormat:@"%@, %@", data.title, data.detail];
         cell.textLabel.text = cellValue;
+        
     }
     
     // Create custom color
