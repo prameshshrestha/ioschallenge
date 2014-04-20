@@ -103,6 +103,7 @@
     
     if (tableView == self.searchDisplayController.searchResultsTableView)
     {
+        // Load titleText and detailText
         cellValue = [NSString stringWithFormat:@"%@, %@", data.title, data.detail];
         cell.textLabel.text = cellValue;
         
@@ -128,6 +129,7 @@
                 //[tableView endUpdates];
             //});
         //});
+        
         // Load Image
         NSString *imageUrl = [myDict objectForKey:@"imageURL"];
         NSURL *url = [NSURL URLWithString:imageUrl];
@@ -135,6 +137,7 @@
         UIImage *image = [UIImage imageWithData:imageData];
         cell.imageView.image = image;
         
+        // Load titleText and detailText
         cellValue = [NSString stringWithFormat:@"%@, %@", data.title, data.detail];
         cell.textLabel.text = cellValue;
         
