@@ -105,7 +105,13 @@
     {
         cellValue = [NSString stringWithFormat:@"%@, %@", data.title, data.detail];
         cell.textLabel.text = cellValue;
-    }
+        
+        // Load Image
+        NSString *imageUrl = [myDict objectForKey:@"imageURL"];
+        NSURL *url = [NSURL URLWithString:imageUrl];
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        UIImage *image = [UIImage imageWithData:imageData];
+        cell.imageView.image = image;    }
     else
     {
         //Load image asynchronously
@@ -122,7 +128,7 @@
                 //[tableView endUpdates];
             //});
         //});
-        
+        // Load Image
         NSString *imageUrl = [myDict objectForKey:@"imageURL"];
         NSURL *url = [NSURL URLWithString:imageUrl];
         NSData *imageData = [NSData dataWithContentsOfURL:url];
