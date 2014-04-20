@@ -43,7 +43,7 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF.titleText contains[cd] %@ OR SELF.detailText contains[cd] %@", searchText, searchText];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF.titleText contains[c] %@ OR SELF.detailText contains[c] %@", searchText, searchText];
     searchResults = [casts filteredArrayUsingPredicate:resultPredicate];
 }
 
